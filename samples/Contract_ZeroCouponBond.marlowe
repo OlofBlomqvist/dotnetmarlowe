@@ -1,0 +1,26 @@
+When [
+  (Case
+     (Deposit
+        (Role "Investor")
+        (Role "Investor")
+        (Token "" "")
+        (ConstantParam "Discounted price"))
+     (Pay
+        (Role "Investor")
+        (Party
+           (Role "Issuer"))
+        (Token "" "")
+        (ConstantParam "Discounted price")
+        (When [
+           (Case
+              (Deposit
+                 (Role "Issuer")
+                 (Role "Issuer")
+                 (Token "" "")
+                 (ConstantParam "Notional price"))
+              (Pay
+                 (Role "Issuer")
+                 (Party
+                    (Role "Investor"))
+                 (Token "" "")
+                 (ConstantParam "Notional price") Close))] (SlotParam "Maturity exchange deadline") Close)))] (SlotParam "Initial exchange deadline") Close

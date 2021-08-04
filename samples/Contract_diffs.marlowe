@@ -1,0 +1,81 @@
+When [
+  (Case
+     (Deposit
+        (Role "Party")
+        (Role "Party")
+        (Token "" "")
+        (Constant 100000000))
+     (When [
+        (Case
+           (Deposit
+              (Role "Counterparty")
+              (Role "Counterparty")
+              (Token "" "")
+              (Constant 100000000))
+           (When [
+              (Case
+                 (Choice
+                    (ChoiceId "Price at beginning"
+                       (Role "Oracle")) [
+                    (Bound 0 1000000000)])
+                 (When [] 150
+                    (When [
+                       (Case
+                          (Choice
+                             (ChoiceId "Price at end"
+                                (Role "Oracle")) [
+                             (Bound 0 1000000000)])
+                          (If
+                             (ValueGT
+                                (ChoiceValue
+                                   (ChoiceId "Price at beginning"
+                                      (Role "Oracle")))
+                                (ChoiceValue
+                                   (ChoiceId "Price at end"
+                                      (Role "Oracle"))))
+                             (Let "Decrease in price"
+                                (SubValue
+                                   (ChoiceValue
+                                      (ChoiceId "Price at beginning"
+                                         (Role "Oracle")))
+                                   (ChoiceValue
+                                      (ChoiceId "Price at end"
+                                         (Role "Oracle"))))
+                                (Pay
+                                   (Role "Counterparty")
+                                   (Account
+                                      (Role "Party"))
+                                   (Token "" "")
+                                   (Cond
+                                      (ValueLT
+                                         (UseValue "Decrease in price")
+                                         (Constant 100000000))
+                                      (UseValue "Decrease in price")
+                                      (Constant 100000000)) Close))
+                             (If
+                                (ValueLT
+                                   (ChoiceValue
+                                      (ChoiceId "Price at beginning"
+                                         (Role "Oracle")))
+                                   (ChoiceValue
+                                      (ChoiceId "Price at end"
+                                         (Role "Oracle"))))
+                                (Let "Increase in price"
+                                   (SubValue
+                                      (ChoiceValue
+                                         (ChoiceId "Price at end"
+                                            (Role "Oracle")))
+                                      (ChoiceValue
+                                         (ChoiceId "Price at beginning"
+                                            (Role "Oracle"))))
+                                   (Pay
+                                      (Role "Party")
+                                      (Account
+                                         (Role "Counterparty"))
+                                      (Token "" "")
+                                      (Cond
+                                         (ValueLT
+                                            (UseValue "Increase in price")
+                                            (Constant 100000000))
+                                         (UseValue "Increase in price")
+                                         (Constant 100000000)) Close)) Close)))] 180 Close)))] 90 Close))] 60 Close))] 30 Close

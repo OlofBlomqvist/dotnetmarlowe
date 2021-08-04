@@ -1,0 +1,7 @@
+Deposit
+        (Role "Ada provider")
+        (Role "Ada provider")
+        (Token "" "")
+        (MulValue
+           (Constant 1000000)
+           (ConstantParam "Amount of Ada"))

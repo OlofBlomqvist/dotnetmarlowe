@@ -1,0 +1,103 @@
+When [
+  (Case
+     (Deposit
+        (Role "Investor")
+        (Role "Guarantor")
+        (Token "" "")
+        (AddValue
+           (MulValue
+              (Constant 3)
+              (ConstantParam "Interest instalment"))
+           (ConstantParam "Principal")))
+     (When [
+        (Case
+           (Deposit
+              (Role "Issuer")
+              (Role "Investor")
+              (Token "" "")
+              (ConstantParam "Principal"))
+           (Pay
+              (Role "Issuer")
+              (Party
+                 (Role "Issuer"))
+              (Token "" "")
+              (ConstantParam "Principal")
+              (When [
+                 (Case
+                    (Deposit
+                       (Role "Investor")
+                       (Role "Issuer")
+                       (Token "" "")
+                       (ConstantParam "Interest instalment"))
+                    (Pay
+                       (Role "Investor")
+                       (Party
+                          (Role "Investor"))
+                       (Token "" "")
+                       (ConstantParam "Interest instalment")
+                       (Pay
+                          (Role "Investor")
+                          (Party
+                             (Role "Guarantor"))
+                          (Token "" "")
+                          (ConstantParam "Interest instalment")
+                          (When [
+                             (Case
+                                (Deposit
+                                   (Role "Investor")
+                                   (Role "Issuer")
+                                   (Token "" "")
+                                   (ConstantParam "Interest instalment"))
+                                (Pay
+                                   (Role "Investor")
+                                   (Party
+                                      (Role "Investor"))
+                                   (Token "" "")
+                                   (ConstantParam "Interest instalment")
+                                   (Pay
+                                      (Role "Investor")
+                                      (Party
+                                         (Role "Guarantor"))
+                                      (Token "" "")
+                                      (ConstantParam "Interest instalment")
+                                      (When [
+                                         (Case
+                                            (Deposit
+                                               (Role "Investor")
+                                               (Role "Issuer")
+                                               (Token "" "")
+                                               (AddValue
+                                                  (ConstantParam "Interest instalment")
+                                                  (ConstantParam "Principal")))
+                                            (Pay
+                                               (Role "Investor")
+                                               (Party
+                                                  (Role "Investor"))
+                                               (Token "" "")
+                                               (AddValue
+                                                  (ConstantParam "Interest instalment")
+                                                  (ConstantParam "Principal"))
+                                               (Pay
+                                                  (Role "Investor")
+                                                  (Party
+                                                     (Role "Guarantor"))
+                                                  (Token "" "")
+                                                  (AddValue
+                                                     (ConstantParam "Interest instalment")
+                                                     (ConstantParam "Principal")) Close)))] 150 Close))))] 120 Close))))] 90 Close)))] 60
+         (Pay
+            (Role "Investor")
+            (Party (Role "Guarantor"))
+            (Token "" "")
+            (AddValue 
+               (MulValue 
+                  (Constant 3) 
+                  (ConstantParam "Interest instalment")
+               )
+               (ConstantParam "Principal")
+            ) 
+         Close
+         )
+      )
+   )
+] 30 Close

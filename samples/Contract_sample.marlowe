@@ -1,0 +1,75 @@
+When [
+  (Case
+     (Deposit
+        (Role "Party")
+        (Role "Party")
+        (Token "a" "b")
+        (Constant 222)
+    )
+     (When [
+        (Case
+           (Deposit
+              (Role "Counterparty")
+              (Role "Counterparty")
+              (Token "" "")
+              (Constant 222))
+           (When [
+              (Case
+                 (Choice
+                    (ChoiceId "dir-adausd" (Role "kraken")) 
+                    [(Bound 0 222000)]
+                  )
+                 (When [] 150
+                    (When [
+                       (Case
+                          (Choice
+                             (ChoiceId "inv-adausd"
+                                (Role "kraken")) [
+                             (Bound 0 222000)])
+                          (Let "Price at end"
+                             (Scale 
+                                (1 % 222)
+                                (MulValue
+                                   (ChoiceValue (ChoiceId "dir-adausd" (Role "kraken")))
+                                   (ChoiceValue (ChoiceId "inv-adausd" (Role "kraken")))
+                                )
+                              )
+                             (If
+                                (ValueGT
+                                   (Constant 100009000)
+                                   (UseValue "Price at end"))
+                                (Let "Decrease in price"
+                                   (SubValue
+                                      (Constant 222)
+                                      (UseValue "Price at end"))
+                                   (Pay
+                                      (Role "Counterparty")
+                                      (Account
+                                         (Role "Party")
+                                       )
+                                      (Token "" "")
+                                      (Cond
+                                         (ValueLT
+                                            (UseValue "Decrease in price")
+                                            (Constant 222))
+                                         (UseValue "Decrease in price")
+                                         (Constant 222)) Close))
+                                (If
+                                   (ValueLT
+                                      (Constant 222)
+                                      (UseValue "Price at end"))
+                                   (Let "Increase in price"
+                                      (SubValue
+                                         (UseValue "Price at end")
+                                         (Constant 222))
+                                      (Pay
+                                         (Role "Party")
+                                         (Account
+                                            (Role "Counterparty"))
+                                         (Token "" "")
+                                         (Cond
+                                            (ValueLT
+                                               (UseValue "Increase in price")
+                                               (Constant 456))
+                                            (UseValue "Increase in price")
+                                            (Constant 123)) Close)) Close))))] 180 Close)))] 90 Close))] 60 Close))] 310 Close
