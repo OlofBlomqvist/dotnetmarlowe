@@ -1,11 +1,11 @@
-#load "types.fsx"
-#load "reflection.fsx"
-#load "tokenizer.fsx"
-#load "deserializer.fsx"
-#load "serializer.fsx"
+#load "types.fs"
+#load "reflection.fs"
+#load "tokenizer.fs"
+#load "deserializer.fs"
+#load "serializer.fs"
 
-open Serializer
-open Types
+open dotnetmarlowe.Serializer
+open dotnetmarlowe.Types
 
 let myContract = 
     
