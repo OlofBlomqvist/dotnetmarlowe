@@ -1,8 +1,9 @@
-#load "types.fs"
-#load "reflection.fs"
-#load "tokenizer.fs"
-#load "deserializer.fs"
-#load "serializer.fs"
+#r "bin/Debug/net5.0/dotmarlowe.dll"
+// #load "src/types.fs"
+// #load "src/reflection.fs"
+// #load "src/tokenizer.fs"
+// #load "src/deserializer.fs"
+// #load "src/serializer.fs"
 
 open dotnetmarlowe.Serializer
 open dotnetmarlowe.Deserializer
@@ -65,5 +66,10 @@ match args with
     failwith "File not found: {filePath}"          
 | [|_;filePath|] ->
     let sample = System.IO.File.ReadAllText filePath
-    genericDeserialize sample |> printfn "%A"
+    let timer = System.Diagnostics.Stopwatch.StartNew()
+    let result = genericDeserialize sample
+    timer.Stop()
+    printfn $"Deserialization completed in: {timer.ElapsedMilliseconds}ms" 
+    printfn "------------------------------------------"
+    printfn $"{result}"
 | _ -> failwith "Unknown error"

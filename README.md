@@ -24,15 +24,11 @@ $ dotnet fsi script.fsx test
 ##### Parse a marlowe file and get the resulting F# object
 ```
 $ dotnet fsi script.fsx samples/Deposit_Sample.marlowe
-> Deposit (
-    Role "Rick", 
-    Role "Morty", 
-    Token ("", ""),
-    MulValue (
-        Constant 1000000L, 
-        ConstantParam "A WHOLE LOT OF ADA"
-    )
-)
+> Deserialization completed in: 15ms
+------------------------------------------
+Deposit
+  (Role "Ada provider", Role "Ada provider", Token ("", ""),
+   MulValue (Constant 1000000L, ConstantParam "Amount of Ada"))
 ```
 
 ##### Deserializing Marlowe contract into F#:

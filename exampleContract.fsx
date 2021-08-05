@@ -1,10 +1,6 @@
-#load "types.fs"
-#load "reflection.fs"
-#load "tokenizer.fs"
-#load "deserializer.fs"
-#load "serializer.fs"
+#load "src/types.fs"
+//#r "/media/zdx/data/Source/dotnetmarlowe/bin/Debug/net5.0/dotmarlowe.dll"
 
-open dotnetmarlowe.Serializer
 open dotnetmarlowe.Types
 
 let myContract = 
