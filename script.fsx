@@ -1,9 +1,9 @@
-#r "bin/Debug/net5.0/dotmarlowe.dll"
-// #load "src/types.fs"
-// #load "src/reflection.fs"
-// #load "src/tokenizer.fs"
-// #load "src/deserializer.fs"
-// #load "src/serializer.fs"
+//#r "src/bin/Debug/net5.0/dotmarlowe.dll"
+#load "src/types.fs"
+#load "src/reflection.fs"
+#load "src/tokenizer.fs"
+#load "src/deserializer.fs"
+#load "src/serializer.fs"
 
 open dotnetmarlowe.Serializer
 open dotnetmarlowe.Deserializer
