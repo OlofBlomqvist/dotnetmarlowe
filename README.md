@@ -1,7 +1,7 @@
 # DotnetMarlowe
 
 **NOTE** This library was created based on an older version of the Marlowe language 
-and will not be able to parse moderns contracts containing.
+and will not be able to parse moderns contracts.
 
 Toy implementation for serializing and deserializing [Cardano](https://cardano.org/) [Marlowe](https://alpha.marlowe.iohkdev.io/doc/index.html) 
 smart contracts to and from F# DU types.
